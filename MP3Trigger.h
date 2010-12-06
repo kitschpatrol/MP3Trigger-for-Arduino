@@ -10,12 +10,13 @@ Doesn't handle messages from the trigger at this point
 #define MP3_TRIGGER_H
 
 #include <WProgram.h>
+#include "NewSoftSerial.h"
 
 class MP3Trigger{
   public:
 	MP3Trigger();
 	~MP3Trigger();
-	void setup(HardwareSerial* serial);
+	void setup(NewSoftSerial* serial);
 	void setup();
   	void play();
 	void stop();
@@ -35,7 +36,7 @@ private:
 	byte mLoopTrack;
 	bool mPlaying;
 	void loop();
-	HardwareSerial* s;
+	NewSoftSerial* s;
 };
 
 #endif

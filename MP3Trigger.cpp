@@ -23,7 +23,7 @@ void MP3Trigger::setup()
 	setup(&Serial);
 }
 
-void MP3Trigger::setup(HardwareSerial* serial)
+void MP3Trigger::setup(NewSoftSerial* serial)
 {
 	s = serial;
 	s->begin(38400);
