@@ -4,20 +4,6 @@ http://sansumbrella.com/
 Simple wrapper for MP3Trigger serial communication from Arduino.
 Also allows you to loop tracks
 
-Quick example:
+Modifications by Eric Mika for compatibility with NewSoftSerial.
 
-#include <MP3Trigger.h>
-MP3Trigger trigger;
-void setup()
-{
-//start serial communication with the trigger (over Serial)
-trigger.setup();
-//start looping TRACK001.MP3
-trigger.setLooping(true,1);
-}
-
-void loop()
-{
-//necessary to receive signals from trigger
-trigger.update();
-}
+See basicLoop.pde for usage example.

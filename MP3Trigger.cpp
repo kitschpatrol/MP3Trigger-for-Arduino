@@ -4,6 +4,8 @@ MP3Trigger.cpp
 @url	sansumbrella.com
 */
 
+#include "WProgram.h"
+#include "NewSoftSerial.h"
 #include "MP3Trigger.h"
 
 MP3Trigger::MP3Trigger()
@@ -18,14 +20,9 @@ MP3Trigger::~MP3Trigger()
 	s = NULL;
 }
 
-void MP3Trigger::setup()
+void MP3Trigger::setup(NewSoftSerial &serial)
 {
-	setup(&Serial);
-}
-
-void MP3Trigger::setup(NewSoftSerial* serial)
-{
-	s = serial;
+	s = &serial;
 	s->begin(38400);
 }
 
@@ -92,18 +89,18 @@ void MP3Trigger::stop()
 
 void MP3Trigger::play()
 {
-	s->write('O');
+	s->print('O');
 	mPlaying = !mPlaying;
 }
 
 void MP3Trigger::forward()
 {
-	s->write('F');
+	s->print('F');
 }
 
 void MP3Trigger::reverse()
 {
-	s->write('R');
+	s->print('R');
 }
 
 //
@@ -112,23 +109,23 @@ void MP3Trigger::reverse()
 
 void MP3Trigger::trigger(byte track)
 {
-	s->write('t');
-	s->write(track);
+	s->print('t');
+	s->print(track);
 	mPlaying = true;
 }
 
 void MP3Trigger::play(byte track)
 {
-	s->write('p');
-	s->write(track);
+	s->print('p');
+	s->print(track);
 	mPlaying = true;
 }
 
 void MP3Trigger::setVolume(byte level)
 {
 	// level = level ^ B11111111;	//flip it around, so the higher number > higher volume
-	s->write('v');
-	s->write(level);
+	s->print('v');
+	s->print(level);
 }
 
 // 
@@ -139,8 +136,8 @@ void MP3Trigger::statusRequest()
 {
 	s->println("MP3Trigger::statusRequest is not yet implemented");
 	s->flush();
-	s->write('S');
-	s->write('1');
+	s->print('S');
+	s->print('1');
 	delay(5);
 	s->read();
 	//will need to work on this one to make it useful
